@@ -5,7 +5,7 @@ const { DataTypes, DATEONLY } = require('sequelize');
 
 module.exports = (sequelize) => {
   // defino el modelo
-  const Users = sequelize.define('user', {
+  const User = sequelize.define('user', {
     id_user:{
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -42,11 +42,11 @@ module.exports = (sequelize) => {
     }
   })
 
-  Users.generateSalt = function () {
+  User.generateSalt = function () {
     return crypto.randomBytes(16).toString("base64")
   }
 
-  Users.encryptPassword = function (plainText, salt) {
+  User.encryptPassword = function (plainText, salt) {
     return crypto
       .createHash("RSA-SHA256")
       .update(plainText)
@@ -61,7 +61,7 @@ module.exports = (sequelize) => {
     }
   }
 
-  Users.beforeCreate(setSaltAndPassword);
-  Users.beforeUpdate(setSaltAndPassword);
+  User.beforeCreate(setSaltAndPassword);
+  User.beforeUpdate(setSaltAndPassword);
 
 };
