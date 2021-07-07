@@ -7,7 +7,7 @@ const crypto = require("crypto");
 module.exports = (sequelize) => {
   // defino el modelo
   const User = sequelize.define('user', {
-    id_user:{
+    id:{
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,

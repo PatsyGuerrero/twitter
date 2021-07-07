@@ -6,24 +6,17 @@ const { DataTypes, DATEONLY } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('tweet', {
-    id_tweet:{
+    id:{
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
     tweet: {
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING(250),
       allowNull: false,
     },
-    update_date: {
-      type:DataTypes.STRING,
-    validate: { 
-   isDate: true
-              }
-    },
     url: {
-      type: DataTypes.STRING,
-      allowNull:false,
+      type: DataTypes.STRING
     }
   });
 

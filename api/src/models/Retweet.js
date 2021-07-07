@@ -6,7 +6,7 @@ const { DataTypes, DATEONLY } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('retweet', {
-    id_retweet:{
+    id:{
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,

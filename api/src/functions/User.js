@@ -8,7 +8,7 @@ async function createUser(name, password, email,user_name) {
    
     try {
    
-        console.log('entra',name, password, email,user_name )
+      
         
         let [newUser, created] = await User.findOrCreate({
           where: { email },

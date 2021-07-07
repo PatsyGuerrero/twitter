@@ -35,8 +35,16 @@ const { Login, Retweet, Tweet, User} = sequelize.models;
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 
-User.hasMany(Tweet);
+User.hasMany(Tweet, {
+  foreignKey: {
+    allowNull: false,
+  },
+});
+Tweet.belongsTo(User);
+
 Tweet.hasMany(Retweet);
+Retweet.belongsTo(Tweet);
+
 User.belongsToMany(Login, { through: 'user_login' });
 Login.belongsToMany(User, { through: 'user_login' });
 
