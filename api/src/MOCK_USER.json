@@ -4,5 +4,11 @@
     "password":"12345",
     "email":"patsy_guerrero95@hotmail.com",
     "user_name":"patsyguerrero"
+    },
+    {
+        "name":"Pat",
+        "password":"125",
+        "email":"patsyg95@hotmail.com",
+        "user_name":"patsyg" 
     }
 ]
