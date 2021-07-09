@@ -2,11 +2,12 @@ const { DataTypes, DATEONLY } = require('sequelize');
 // Exportamos una funcion que define el modelo
 // Luego le injectamos la conexion a sequelize.
 
+const crypto = require("crypto");
 
 module.exports = (sequelize) => {
   // defino el modelo
-  const Users = sequelize.define('user', {
-    id_user:{
+  const User = sequelize.define('user', {
+    id:{
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
@@ -42,11 +43,11 @@ module.exports = (sequelize) => {
     }
   })
 
-  Users.generateSalt = function () {
+  User.generateSalt = function () {
     return crypto.randomBytes(16).toString("base64")
   }
 
-  Users.encryptPassword = function (plainText, salt) {
+  User.encryptPassword = function (plainText, salt) {
     return crypto
       .createHash("RSA-SHA256")
       .update(plainText)
@@ -56,12 +57,12 @@ module.exports = (sequelize) => {
 
   const setSaltAndPassword = (user) => {
     if (user.changed("password")) {
-      user.salt = Users.generateSalt()
-      user.password = Users.encryptPassword(user.password(), user.salt())
+      user.salt = User.generateSalt()
+      user.password = User.encryptPassword(user.password(), user.salt())
     }
   }
 
-  Users.beforeCreate(setSaltAndPassword);
-  Users.beforeUpdate(setSaltAndPassword);
+  User.beforeCreate(setSaltAndPassword);
+  User.beforeUpdate(setSaltAndPassword);
 
 };

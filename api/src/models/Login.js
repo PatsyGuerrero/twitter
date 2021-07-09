@@ -6,7 +6,7 @@ const { DataTypes, DATEONLY } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('login', {
-    id_login:{
+    id:{
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
