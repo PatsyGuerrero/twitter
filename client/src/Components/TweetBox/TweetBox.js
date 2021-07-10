@@ -6,7 +6,7 @@ export default function TweetBox() {
         <div className="tweetBox">
         <form>
           <div className="tweetBox__input">
-              <div className={`container_img`}>
+              <div className="container_img">
                  <img src={require(`./patsy.png`).default} alt="no se encuentra" />
               </div>
             <input

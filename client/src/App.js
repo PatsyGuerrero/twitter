@@ -1,18 +1,18 @@
 import './App.css';
-import Sidebar from '../src/Components/Sidebar/Sidebar';
-import Feed from '../src/Components/Feed/Feed';
-import Widgets from '../src/Components/Widgets/Widgets';
-
+import { Route, Switch } from "react-router-dom";
+import Home from './Containers/Home';
+import Landing from './Containers/Landing';
 
 
 function App() {
   return (
-    <div className="app">
+    <>
+      <Switch>
+        <Route exact path="/" component={Landing}/>
+        <Route exact path="/home" component={Home} />
+      </Switch>
     
-     <Sidebar/>
-     <Feed/>
-     <Widgets/>
-    </div>
+    </>
   );
 }
 

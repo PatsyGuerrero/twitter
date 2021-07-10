@@ -9,11 +9,10 @@
 
   .sidebar__twitterIcon {
     color: var(--twitter-color);
-    font-size: 30px !important;
     margin-left: 20px;
     margin-bottom: 20px;
   }
-  
+
 .sidebar__tweet{
     background-color: var(--twitter-color) !important;
     border: none !important;
