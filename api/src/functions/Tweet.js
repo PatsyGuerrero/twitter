@@ -26,20 +26,38 @@ async function createTweet(tweet, idUser) {
             tweet: tweet,
             userId:user.id
         })
- 
-        // insert.setTweets(tweetId);
 
-            // let juegos = await Tweet.findAll({
-            //     include:{model:User,  attributes:{exclude: ["createdAt" , "updatedAt"]} },
-            //     attributes:{exclude: ["createdAt" , "updatedAt"]}
-            // });
         return ('El tweet se guardo correctamente');
       } catch (error) {
-        return ('Error')
+        // return ('Error')
+        console.log(error)
       }
+}
+
+async function getAllTweets() {
+
+      console.log('estoy en funcion');
+
+      try {
+          
+          let tweets = await Tweet.findAll({
+                      
+            include:{model:User,  attributes:{exclude: ["createdAt" , "updatedAt"]} },
+            attributes:{exclude: ["createdAt" , "updatedAt"]}
+
+            });
+
+            return tweets;
+
+        } catch (err) {
+            return ('No existen tweets')
+        }
+
 
 }
 
+
 module.exports = {
-    createTweet
+    createTweet,
+    getAllTweets
   };

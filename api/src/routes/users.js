@@ -1,10 +1,6 @@
 require('dotenv').config();
 var Sequelize = require("sequelize");
 const server = require('express').Router();
-const {User} = require ('../db.js');
-const axios = require ('axios');
-const fetch = require('node-fetch');
-const {response} = require ('express');
 const { createUser, loginUser } = require('../functions/User.js');
 //const {loginUser} = '../functions/User.js'
 
@@ -13,7 +9,7 @@ server.post('/register', async function(req, res){
 
   const {name, password, email,user_name} = req.body;
 
-  //console.log('parametros', req.body)
+  console.log('parametros', req.body)
   try {
 
       let registerUser = await createUser(name, password, email,user_name);
@@ -30,7 +26,7 @@ server.post('/register', async function(req, res){
 });
 
 
-  server.post('/login', async function(req, res){
+  server.get('/login', async function(req, res){
 
     const {email, password} = req.body;
 

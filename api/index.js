@@ -22,7 +22,7 @@ const { conn } = require('./src/db.js');
 const { dataPopulation } = require("./src/dataPopulation.js");
 
 // Syncing all the models at once.
-conn.sync({ force: true }).then( async() => {
+conn.sync({ force: true}).then( async() => {
   await dataPopulation();
 
   server.listen(3001, () => {
