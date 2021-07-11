@@ -5,6 +5,9 @@ body {
   --twitter-button:#34A6F3;
   --twitter-gray:#E8F5FE;
   --twitter-white:white;
+  --input-default-border-color: white;
+    --input-border-bottom-color: white;
+    --twitter-plomo:gray;
 }
 
 

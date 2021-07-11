@@ -7,15 +7,15 @@ import { Provider } from 'react-redux';
 import reportWebVitals from './reportWebVitals';
 import { store } from './store/store';
 
-
-ReactDOM.render(
+const nodes = (
   <Provider store={store} >
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </Provider>,
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+  </Provider>
+); 
 
-  document.getElementById('root')
+ReactDOM.render(nodes,document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

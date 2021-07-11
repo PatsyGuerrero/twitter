@@ -1,6 +1,8 @@
 import React from 'react';
 import './Landing.css';
 import { FaTwitter } from 'react-icons/fa';
+import {Link} from 'react-router-dom';
+
 
 
 export default function Landing() {
@@ -22,7 +24,7 @@ export default function Landing() {
                     </div>
             
                     <div className='cont_botones'>
-                        <button className="cont_register">Register</button>
+                    <Link to={`/register`}><button className="cont_register">Register</button></Link>
                         <button className="cont_login">Login</button>
                     </div>
                 </div>
