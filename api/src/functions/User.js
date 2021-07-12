@@ -88,8 +88,38 @@ async function createUser(name, password, email,user_name) {
     }
   }
 
+
+
+  async function validateCredentials(user, token){
+        try{
+            console.log('sertoken', user, token)
+
+            
+            const userValidate = await User.findOne({
+              where: {
+                email: user,
+              },
+            });
+
+            if(userValidate) {
+              const authToken = (token !== 'null' || !token) ? token: null;
+              // console.log(authToken, 'este est el puto', _)
+              const decoded = jwt.verify(authToken, "secret");
+
+              return true
+            }
+            
+            return false;
+
+        }catch{
+            return false;
+        }
+      }
+    
+
   module.exports = {
     createUser,
     loginUser,
-    deleteUser
+    deleteUser, 
+    validateCredentials
   };
