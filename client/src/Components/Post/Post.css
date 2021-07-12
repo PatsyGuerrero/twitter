@@ -29,6 +29,12 @@
     font-size: 15px;
     margin-bottom: 5px;
   }
+
+  .post__headerText > h3 >p {
+    display: inline;
+    color: var(--twitter-plomo);
+    font-weight: 500;
+  }
   
   .post__badge {
     font-size: 14px !important;

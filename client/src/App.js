@@ -10,8 +10,8 @@ import { urlValidate } from "./Conections/url";
 
 
 function App(props) {
-  let {modal, setModal} = useState(true)
-  let forceLocation;
+  let [ state, setState ] = useState({ modal: true, validate: false });
+  let forceLocation, token= localStorage.getItem('token'), user= localStorage.getItem('email');
   let previousLocation
   const { location } = props;
 
@@ -29,13 +29,10 @@ function App(props) {
     }
 
   const shouldUsePreviousLocation = () => {
-    modal = modal;
+    state.modal = state.modal;
     const { location} = props;
-    
     if (!location) return false;
-
-    return modal && location.pathname==='/register';
-    
+    return state.modal && location.pathname==='/register';
   }
 
   const usePreviousLocation = shouldUsePreviousLocation();
@@ -46,39 +43,62 @@ function App(props) {
     forceLocation= location;
   }
 
-  const validateToken = async () => {
-
-      let token= localStorage.getItem('token');
-      let user= localStorage.getItem('email');
-
-      return await urlValidate(user, token);
-  }
-
-  console.log(validateToken());
-
-
-  return (
-    <>
-      <Switch location={forceLocation}>
-        <Route exact path="/" component={Landing}/>
-        <Route exact path="/home" component={Home} />
-        <Route exact path='/login' component={Login} />
-        <Route exact path="/register" render={ props => (
-                        <Register {...props} modal />
-                    )}/>
-      </Switch>
-      {usePreviousLocation && 
-
+  useEffect(()=>{
+    if(!state.validate){
+      (async function() {
+        setState({ ...state, validate: (await urlValidate(user, token)).data });
+      })();
+    }
+  }, [state.validate,localStorage.getItem('token')])
+  // let security= validateToken().then( response => response);
+  
+  if(state.validate){
+    return (
+      <>
+        <Switch location={forceLocation}>
+          <Route exact path="/" component={Landing}/>
+          <Route exact path="/home" component={Home} />
+          <Route exact path='/login' component={Login} />
           <Route exact path="/register" render={ props => (
-            <Register {...props} modal />
-          )}/>
-
-      }
-       
-       
-    
-    </>
-  );
+                          <Register {...props} modal={state.modal} />
+                      )}/>
+          <Route path="/*" component={() => "404 NOT FOUND"} />
+        </Switch>
+        {usePreviousLocation && 
+  
+            <Route exact path="/register" render={ props => (
+              <Register {...props} modal={state.modal} />
+            )}/>
+  
+        }
+      </>
+    );
+  }else{
+    return (
+      <>
+        <Switch location={forceLocation}>
+          <Route exact path="/" component={Landing}/>
+          {/* <Route exact path="/home" component={Home} /> */}
+          <Route exact path='/login' component={Login} />
+          <Route exact path="/register" render={ props => (
+                          <Register {...props} modal={state.modal} />
+                      )}/>
+          <Route path="/*" component={() => {
+            // setTimeout(function(){ if(!(state.validate)) window.location.replace(window.location.origin) }, 3000);
+            // setTimeout(() => <Redirect to='/'/>, 3000)
+            return "404 NOT FOUND";
+          }} />
+        </Switch>
+        {usePreviousLocation && 
+  
+            <Route exact path="/register" render={ props => (
+              <Register {...props} modal={state.modal} />
+            )}/>
+  
+        }
+      </>
+    );
+  }
 }
 
 export default withRouter(App);

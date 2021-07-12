@@ -13,9 +13,9 @@ async function dataPopulation() {
     //await User.bulkCreate(MOCK_USER);
    // await User.bulkCreate(MOCK_USER);
 
-   await createTweet("En Twitter: ¿Otra temporada? ¡Nadie ve esa serie! Con amigos: Amix, ¿me prestas tu Netflix? ", "3");
-   await createTweet("No hace falta un gobierno perfecto; se necesita uno que sea práctico. Aristóteles ", "1");
-   await createTweet("No hace falta un gobierno perfecto; se necesita uno que sea práctico. Aristóteles ", "2");
+   await createTweet("En Twitter: ¿Otra temporada? ¡Nadie ve esa serie! Con amigos: Amix, ¿me prestas tu Netflix? ", "santiagorincon2001@gmail.com");
+   await createTweet("No hace falta un gobierno perfecto; se necesita uno que sea práctico. Aristóteles ", "franronaldo@gmail.com");
+   await createTweet("No hace falta un gobierno perfecto; se necesita uno que sea práctico. Aristóteles ", "patsy_guerrero95@hotmail.com", "https://media.giphy.com/media/KtyTa7XH5ueJLYwmaG/giphy.gif");
 
     
 

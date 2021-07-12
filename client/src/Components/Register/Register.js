@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React from 'react';
 import { FaTwitter } from 'react-icons/fa';
 import './Register.css';
 import ReactDOM from 'react-dom';
@@ -7,18 +7,16 @@ import { IoClose } from "react-icons/io5";
 import {Link, Redirect} from 'react-router-dom';
 import { urlRegister } from '../../Conections/url';
 
-
-
-
 const Register = (props) => {
 
     let response;
 
     const [info, setInfo] = React.useState({
         name: '',
-        username: '',
+        user_name: '',
         email: '',
         password: '',
+        value:false
     });
 
     const handleInputs = (e) => {
@@ -31,17 +29,19 @@ const Register = (props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        response = await urlRegister(info.name, info.username,info.email, info.password);
-        //console.log(typeof response?.data, 'oooo');
+        response = await urlRegister(info);
         if( response?.data){
+           
             setInfo({
                 name:'',
                 email: '',
                 password: '',
-                error: ''
+                user_name:'',
+                error: '',
+                value:true
             });
-            // redireccionar a home
-            return <Redirect to='http://localhost:3000/login' />;
+            // redireccionar a login
+            return <Redirect to='/login'/>;
         }
         else{
             // cambiamos el mensaje de error
@@ -51,10 +51,15 @@ const Register = (props) => {
                 ...info,
                 error: response?.data
             });
-            console.log(info.error, 'iiiiiiiiiiiiiiiiii')
+           // console.log(info.error, 'iiiiiiiiiiiiiiiiii')
         }
     }
-
+  
+    if(info.value) {
+        console.log('segundo if')
+        return <Redirect to='/login'/>;
+    }
+    
     const Nodes= (
         <div className='center'>
             <div className='cont_modal'>
@@ -73,9 +78,9 @@ const Register = (props) => {
                         <div className="inputbox">
                             <input 
                             type="text"
-                            name="email"
+                            name="name"
                             onChange={handleInputs} 
-                            value={info.email}
+                            value={info.name}
                             required="required"/>
                             <span>Name</span>
                         </div>
@@ -83,9 +88,9 @@ const Register = (props) => {
                         < div className="inputbox">
                             <input 
                             type="text" 
-                            name="username"
+                            name="user_name"
                             onChange={handleInputs} 
-                            value={info.username}
+                            value={info.user_name}
                             required="required"/>
 
                             <span>Username</span>
@@ -116,7 +121,7 @@ const Register = (props) => {
                         </div>
             
                         <div className="inputbox">
-                            <input type="button" value="Submit"/>
+                            <input type="submit" value="Submit"/>
                         </div>
                     </div>
 

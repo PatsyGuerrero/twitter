@@ -13,16 +13,14 @@ const { createTweet, getAllTweets} = require('../functions/Tweet.js');
 server.post('/create', async function(req, res){
     
     console.log('ruta tweet', req.body)
-    const {tweet, idUser} = req.body;
+    const {tweet, email, url} = req.body;
   
-    
     try {
-        console.log('dudas')
-        let postTweet= await createTweet(tweet, idUser);
+       
+        let postTweet= await createTweet(tweet, email, url);
        // let create = createUser()
-        
-        console.log(postTweet);
-            return res.sendStatus(200);
+
+        return res.send(postTweet);
   
     } catch (err) {
 
@@ -34,14 +32,14 @@ server.post('/create', async function(req, res){
 
   server.get('/tweets', async function(req, res){
     
-    console.log('ruta tweets')
+    
  
     try {
-        console.log('dudas')
+    
         let tweets= await getAllTweets();
      
-        
-        return res.status(200).json(tweets);
+     
+        return res.send(tweets);
   
     } catch (err) {
 

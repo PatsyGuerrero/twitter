@@ -123,7 +123,7 @@
   color: var(--twitter-button);
  
 }
-.center .inputbox [type="button"] {
+.center .inputbox [type="submit"] {
   /* width: 50%;
   background: dodgerblue;
   color: #fff;
@@ -139,7 +139,7 @@
   width: 100% ;
 
 }
-.center .inputbox:hover [type="button"] {
+.center .inputbox:hover [type="submit"] {
   background-color: var(--twitter-hover);
   cursor: pointer;
 }

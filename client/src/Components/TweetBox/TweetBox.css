@@ -41,14 +41,19 @@
   }
 
   .tweetBox__tweetButton {
-    background-color: var(--twitter-color) !important;
-    border: none !important;
-    color: white !important;
-    font-weight: 900 !important;
-    text-transform: inherit !important;
-    border-radius: 30px !important;
+    background-color: var(--twitter-color) ;
+    border: none ;
+    color: white ;
+    font-weight: 900 ;
+    text-transform: inherit ;
+    border-radius: 30px ;
     width: 80px;
-    height: 40px !important;
-    margin-top: 20px !important;
-    margin-left: auto !important;
+    height: 40px ;
+    margin-top: 20px ;
+    margin-left: auto ;
+  }
+
+  .tweetBox__tweetButton:hover {
+    background-color: var(--twitter-hover);
+    cursor: pointer;
   }

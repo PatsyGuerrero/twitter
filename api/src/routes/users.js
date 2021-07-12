@@ -9,14 +9,14 @@ server.post('/register', async function(req, res){
 
   const {name, password, email,user_name} = req.body;
 
-  console.log('parametros', req.body)
+  //console.log('parametros', req.body)
   try {
 
       let registerUser = await createUser(name, password, email,user_name);
      // let create = createUser()
       
      
-          return res.sendStatus(200);
+          return res.send(registerUser);
 
   } catch (err) {
        return res.sendStatus(404);
@@ -29,8 +29,6 @@ server.post('/register', async function(req, res){
 server.get('/login', async function(req, res){
 
      const {email, password} = req.query;
- 
-     console.log('parametros',email, req.query)
      try {
    
          let login = await loginUser(email, password);
@@ -50,15 +48,15 @@ server.get('/login', async function(req, res){
 
      const {user, token} = req.query;
  
-     console.log('parametros', user, token, 'nocheckjjn')
+     //console.log('parametros', user, token, 'nocheckjjn')
      try {
    
          let validate= await validateCredentials(user, token);
         // let create = createUser()
-
-              return res.status(200).json(validate);
+          return res.send(validate);
  
      } catch (err) {
+          console.log('err', err);
           return res.sendStatus(404);
          
      }

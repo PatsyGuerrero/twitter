@@ -21,7 +21,6 @@ function Login() {
     // +++ ojo+++
     const handleInputs = (e) => {
         e.preventDefault();
-        console.log('hola');
         setInput({
             ...input,
             [e.target.name]: e.target.value 
@@ -30,11 +29,12 @@ function Login() {
     }
     
     const handleSubmit = async (e) => {
-        console.log('Fran');
+     
         e.preventDefault();
+        
         response = await urlLogin(input.email, input.password);
         // console.log(typeof response?.data, 'oooo');
-        console.log('response data', response?.data);
+        //console.log('response data', response?.data);
         localStorage.setItem(`token`, JSON.stringify(response.data.token));
         localStorage.setItem(`email`, JSON.stringify(response.data.email));
         if(typeof response?.data === 'object'){
@@ -45,7 +45,7 @@ function Login() {
                 error: ''
             });
             // redireccionar a home
-            return <Redirect to='http://localhost:3000/home' />;
+            return <Redirect to='/home' />;
         }
         else{
             // cambiamos el mensaje de error
@@ -55,7 +55,6 @@ function Login() {
                 ...input,
                 error: response?.data
             });
-            console.log(input.error, 'iiiiiiiiiiiiiiiiii')
         }
     }
 
@@ -66,8 +65,6 @@ function Login() {
 
     return (
         <div className=''>
-            
-            
             <Link to={`/`}>
                 <div className='cont_iconTwitter'>
                         <FaTwitter/>
@@ -114,7 +111,7 @@ function Login() {
                 </div>
             </form>
 
-            <div >gggg{input.error}</div>
+            <div >{input.error}</div>
         </div>
     );
 }

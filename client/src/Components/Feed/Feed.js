@@ -1,9 +1,23 @@
-import React from 'react';
+import React, {useEffect , useState} from 'react';
 import './Feed.css';
 import TweetBox from '../TweetBox/TweetBox';
 import Post from '../Post/Post';
+import { urlGetTweets } from '../../Conections/url';
+
 
 export default function Feed() {
+
+    let [tweets, setTweets] = useState([]);
+
+    useEffect(() => {
+        if(tweets.length ===0){
+            (async function() {
+              setTweets((await urlGetTweets()).data) ;
+            })();
+          }
+    }, [])
+
+   
     return (
         <div className="feed">
             <div className="feed__header">
@@ -11,10 +25,18 @@ export default function Feed() {
             </div>
 
             <TweetBox/>
-            <Post/>
-            <Post/>
-            <Post/>
-            <Post/>
+            {tweets?.map( e => 
+
+                <Post 
+                tweet={e.tweet}
+                username={e.user.user_name}
+                url={e.url}
+                name={e.user.name}
+                
+                />
+                
+                )}
+            
         </div>
     )
 }
