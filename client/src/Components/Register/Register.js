@@ -4,27 +4,64 @@ import './Register.css';
 import ReactDOM from 'react-dom';
 import Modal from '../../Containers/Modal';
 import { IoClose } from "react-icons/io5";
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
+import { urlRegister } from '../../Conections/url';
+
 
 
 
 const Register = (props) => {
 
-    // const [info, setInfo] = useState({
-    //     name:'',
-    //     description:'',
-    //     stock:'',
-    //     price:'',
-    //     image:''
-    // })
+    let response;
+
+    const [info, setInfo] = React.useState({
+        name: '',
+        username: '',
+        email: '',
+        password: '',
+    });
+
+    const handleInputs = (e) => {
+        e.preventDefault();
+        setInfo({
+            ...info,
+            [e.target.name]: e.target.value 
+        })
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        response = await urlRegister(info.name, info.username,info.email, info.password);
+        //console.log(typeof response?.data, 'oooo');
+        if( response?.data){
+            setInfo({
+                name:'',
+                email: '',
+                password: '',
+                error: ''
+            });
+            // redireccionar a home
+            return <Redirect to='http://localhost:3000/login' />;
+        }
+        else{
+            // cambiamos el mensaje de error
+            // errorMessage = response?.data;
+            // alert('hola')
+            setInfo({
+                ...info,
+                error: response?.data
+            });
+            console.log(info.error, 'iiiiiiiiiiiiiiiiii')
+        }
+    }
 
     const Nodes= (
         <div className='center'>
             <div className='cont_modal'>
                 <div className='close'>
-                <Link to={`/`}><IoClose className='cont_iconTwitter'/></Link>
+                <Link to={`/`}><IoClose className=''/></Link>
                 </div>
-                <form onSubmit >
+                <form onSubmit={handleSubmit} >
                     <div className='cont_iconTwitter'>
                             <FaTwitter/>
                     </div>
@@ -34,22 +71,47 @@ const Register = (props) => {
                     <div className='cont_form'>
 
                         <div className="inputbox">
-                            <input type="text" required="required"/>
+                            <input 
+                            type="text"
+                            name="email"
+                            onChange={handleInputs} 
+                            value={info.email}
+                            required="required"/>
                             <span>Name</span>
                         </div>
 
                         < div className="inputbox">
-                            <input type="text" required="required"/>
+                            <input 
+                            type="text" 
+                            name="username"
+                            onChange={handleInputs} 
+                            value={info.username}
+                            required="required"/>
+
                             <span>Username</span>
                         </div>
 
                         <div className="inputbox">
-                            <input type="text" required="required"/>
+
+                            <input 
+                            type="text" 
+                            name="email"
+                            onChange={handleInputs} 
+                            value={info.email}
+                            required="required"/>
+
                             <span>Email</span>
                         </div>
 
                         <div className="inputbox">
-                            <input type="text" required="required"/>
+
+                            <input 
+                            type="password" 
+                            name="password"
+                            onChange={handleInputs} 
+                            value={info.password}
+                            required="required"/>
+                            
                             <span>Password</span>
                         </div>
             
