@@ -5,41 +5,66 @@ const {response} = require ('express');
 var Sequelize = require("sequelize");
 
 
-async function createTweet(tweet, idUser) {
-    
+async function createTweet(tweet, email, url) {
+  
+      console.log('email', email)
+      
+
       if(tweet.length >250){
           return ('Máximo 250 caracteres')
       }    
-      let g= Number(idUser);
+      
+      // if(email.includes('"')) {
+      //   email=email.split('"')[1];
+      // }
 
     try {
 
         const user=await User.findOne({
             where:{
-              id:g
+              email:email
             }
           })
        
-          if(!user) return (`El id ${g} no existe`);
+          console.log(user);
+          if(!user) return (`El email ${email} no existe`);
 
         let insert = await user.createTweet({ 
             tweet: tweet,
+            url:url,
             userId:user.id
         })
- 
-        // insert.setTweets(tweetId);
 
-            // let juegos = await Tweet.findAll({
-            //     include:{model:User,  attributes:{exclude: ["createdAt" , "updatedAt"]} },
-            //     attributes:{exclude: ["createdAt" , "updatedAt"]}
-            // });
-        return ('El tweet se guardo correctamente');
+        return true;
       } catch (error) {
-        return ('Error')
+        // return ('Error')
+        console.log(error)
       }
+}
+
+async function getAllTweets() {
+
+     
+      try {
+          
+          let tweets = await Tweet.findAll({
+                      
+            include:{model:User,  attributes:{exclude: ["createdAt" , "updatedAt"]} },
+            attributes:{exclude: ["updatedAt"]}
+
+            });
+
+            return tweets;
+
+        } catch (err) {
+            return ('No existen tweets')
+        }
+
 
 }
 
+
 module.exports = {
-    createTweet
+    createTweet,
+    getAllTweets
   };

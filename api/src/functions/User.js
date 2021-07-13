@@ -8,25 +8,53 @@ const jwt = require("jsonwebtoken");
 
 
 async function createUser(name, password, email,user_name) {
-   
+   //console.log('create', name, password, email,user_name )
+  if(!name && password && user_name & email ) return 'Ingresar el name';
+  if(name &&!password && user_name & email) return 'Ingresar contraseña';
+  if(name && password && !user_name & email) return 'Ingresar username';
+  if(name && password && user_name & !email) return 'ingresar email';
+
     try {
 
-        let [newUser, created] = await User.findOrCreate({
-          where: { email },
-          defaults: {
-            name,
-            password,
-            email,
-            user_name
-            
+        let emailVerified = await User.findOne({
+          where: {
+            email: email,
           },
         });
-        
-        if (!created){
-          return ('Ya existe el usuario con ese email');     
-          }
+        //console.log('email', emailVerified);
 
-          return ('El usuario fue creado')
+        let username = await User.findOne({
+          where: {
+            user_name: user_name,
+          },
+        });
+
+        //console.log('username', username);
+
+        if(emailVerified==null && username) return 'Ya existe ese username';
+        if(emailVerified && username==null) return 'Ya existe emailVerified';
+        if(emailVerified && username) return 'Ya existen el username y email';
+
+        if (!emailVerified && !username){
+          let [newUser, created] = await User.findOrCreate({
+            where: { email, user_name},
+            defaults: {
+              name,
+              password,
+              email,
+              user_name  
+            },
+          });  
+
+          return true;
+
+        }
+
+        // if (!created){
+        //   return ('Ya existe el usuario con ese email');     
+        //   }
+
+         
               
     } catch (error) {
      return ('Error')
@@ -88,8 +116,40 @@ async function createUser(name, password, email,user_name) {
     }
   }
 
+
+
+  async function validateCredentials(user, token){
+        try{
+             user=user.split('\"')[1];
+             token=token.split('\"')[1];
+            const userValidate = await User.findOne({
+              where: {
+                email: user,
+              },
+            });
+
+            if(userValidate) { 
+              const authToken = (token !== 'null' || !token) ? token: null;
+              // console.log(authToken, 'este est el puto', _)
+              const decoded = jwt.verify(authToken, "secret");
+
+              return true
+            }
+            
+            return false;
+
+        }catch{
+          
+            return false;
+
+            
+        }
+      }
+    
+
   module.exports = {
     createUser,
     loginUser,
-    deleteUser
+    deleteUser, 
+    validateCredentials
   };

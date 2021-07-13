@@ -1,11 +1,7 @@
 require('dotenv').config();
 var Sequelize = require("sequelize");
 const server = require('express').Router();
-const {User} = require ('../db.js');
-const axios = require ('axios');
-const fetch = require('node-fetch');
-const {response} = require ('express');
-const { createUser, loginUser } = require('../functions/User.js');
+const { createUser, loginUser, validateCredentials } = require('../functions/User.js');
 //const {loginUser} = '../functions/User.js'
 
 
@@ -19,8 +15,8 @@ server.post('/register', async function(req, res){
       let registerUser = await createUser(name, password, email,user_name);
      // let create = createUser()
       
-      console.log(registerUser);
-          return res.sendStatus(200);
+     
+          return res.send(registerUser);
 
   } catch (err) {
        return res.sendStatus(404);
@@ -30,27 +26,41 @@ server.post('/register', async function(req, res){
 });
 
 
-  server.post('/login', async function(req, res){
+server.get('/login', async function(req, res){
 
-    const {email, password} = req.body;
-
-    console.log('parametros',email)
-    try {
-  
-        let login = await loginUser(email, password);
-       // let create = createUser()
-        
-        
-            return res.status(200).json(login);
-
-    } catch (err) {
-         return res.sendStatus(404);
-        
-    }
+     const {email, password} = req.query;
+     try {
    
-});
+         let login = await loginUser(email, password);
+        // let create = createUser()
+         
+         
+             return res.status(200).json(login);
+ 
+     } catch (err) {
+          return res.sendStatus(404);
+         
+     }
+    
+ });
 
+ server.get('/validate', async function(req, res){
 
-
+     const {user, token} = req.query;
+ 
+     //console.log('parametros', user, token, 'nocheckjjn')
+     try {
+   
+         let validate= await validateCredentials(user, token);
+        // let create = createUser()
+          return res.send(validate);
+ 
+     } catch (err) {
+          console.log('err', err);
+          return res.sendStatus(404);
+         
+     }
+    
+ });
 
 module.exports= server;

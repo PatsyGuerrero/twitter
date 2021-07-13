@@ -7,9 +7,9 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('tweet', {
     id:{
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV1,
+      primaryKey: true
     },
     tweet: {
       type: DataTypes.STRING(250),

@@ -1,31 +1,53 @@
-// require('dotenv').config();
-// const server = require('express').Router();
-// const {Genero} = require('../db.js')
-// const axios = require ('axios');
-// const {response} = require ('express');
-// const {
-//     YOUR_API_KEY
-//   } = process.env;
+require('dotenv').config();
+var Sequelize = require("sequelize");
+const server = require('express').Router();
+const {Tweet} = require ('../db.js');
+const axios = require ('axios');
+const fetch = require('node-fetch');
+const {response} = require ('express');
+const { createTweet, getAllTweets} = require('../functions/Tweet.js');
+//const {loginUser} = '../functions/User.js'
+
+//console.log('entra');
+
+server.post('/create', async function(req, res){
+    
+    console.log('ruta tweet', req.body)
+    const {tweet, email, url} = req.body;
   
+    try {
+       
+        let postTweet= await createTweet(tweet, email, url);
+       // let create = createUser()
 
-// server.get('/genres', async function (req, res) {
-//     try {
+        return res.send(postTweet);
+  
+    } catch (err) {
+
+         return res.sendStatus(404);
+       
+    }
+   
+  });
+
+  server.get('/tweets', async function(req, res){
+    
+    
+ 
+    try {
+    
+        let tweets= await getAllTweets();
+     
+     
+        return res.send(tweets);
+  
+    } catch (err) {
+
+        return res.sendStatus(404);
         
-//         let genres = await Genero.findAll();
-
-//         if (genres.length === 0) {
-//             genres= await axios.get(`https://api.rawg.io/api/genres?key=${YOUR_API_KEY}`)
-//             let genre= genres.data.results.map(async p => await Genero.create({nombre:p.name}));
-//         }
-
-//         genres = await Genero.findAll();
-
-//         return res.status(200).json(genres); 
-
-//     } catch (err) {
-//         return res.sendStatus(404);
-//     }
-// });
+    }
+   
+  });
 
 
-// module.exports= server;
+module.exports= server;

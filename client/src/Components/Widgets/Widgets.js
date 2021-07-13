@@ -31,8 +31,8 @@ export default function Widgets() {
           />
   
           <TwitterShareButton
-            url={"https://facebook.com/cleverprogrammer"}
-            options={{ text: "#reactjs is awesome", via: "cleverqazi" }}
+            url={"https://www.youtube.com/watch?v=KcBStos46EM&ab_channel=MarvelLatinoam%C3%A9ricaOficial"}
+            options={{ text: "#Loki is awesome", via: "PatsyGuerrero" }}
           />
         </div>
       </div>
