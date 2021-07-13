@@ -9,14 +9,12 @@ import './Login.css';
 
 function Login() {
     let response;
-    // let { countries, ids } = state.create;
     const [input, setInput] = React.useState({
         email: '',
         password: '',
         token: false,
         error: ''
     });
-   
 
     // +++ ojo+++
     const handleInputs = (e) => {
@@ -64,7 +62,7 @@ function Login() {
     }
 
     return (
-        <div className=''>
+        <div className='cont_principal'>
             <Link to={`/`}>
                 <div className='cont_iconTwitter'>
                         <FaTwitter/>
@@ -73,9 +71,8 @@ function Login() {
            
             <h1>Login</h1>
 
+        <div className='cont_form'>
             <form onSubmit={handleSubmit} >
-
-                <div className='cont_form'>
 
                     <div className="inputbox">
 
@@ -90,7 +87,6 @@ function Login() {
                         <span>Name</span>
 
                     </div>
-                   
 
                     <div className="inputbox">
                         <input 
@@ -102,16 +98,17 @@ function Login() {
                         required
                         />
                         <span>Password</span>
-
                     </div>
 
                     <div className="inputbox">
                         <input type="submit"  value="Submit"/>
                     </div>
-                </div>
-            </form>
-
+             
+                </form>
+            
             <div >{input.error}</div>
+            
+            </div>
         </div>
     );
 }

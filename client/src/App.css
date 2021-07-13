@@ -6,8 +6,15 @@ body {
   --twitter-gray:#E8F5FE;
   --twitter-white:white;
   --input-default-border-color: white;
-    --input-border-bottom-color: white;
-    --twitter-plomo:gray;
+  --input-border-bottom-color: white;
+  --twitter-plomo:gray;
+ 
+    --small: 380px;
+    --medium: 767px;
+    --large: 1025px;
+    --xl: 1300px;
+
+
 }
 
 

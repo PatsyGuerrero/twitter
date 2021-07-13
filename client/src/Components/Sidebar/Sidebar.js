@@ -3,14 +3,20 @@ import './Sidebar.css';
 import { FaTwitter, FaHome, FaSearch, FaRegListAlt, FaRegUser } from 'react-icons/fa';
 import SidebarOption from './SidebarOption';
 import { IoNotificationsOutline } from 'react-icons/io5';
-import { FiMoreHorizontal } from 'react-icons/fi';
+import { FiMoreHorizontal, FiLogOut} from 'react-icons/fi';
 import { HiOutlineMail, HiOutlineBookmark} from 'react-icons/hi';
+import { Link } from "react-router-dom";
 
 
 
 // import { Button } from "@material-ui/core";
 
 export default function Sidebar() {
+
+  const logout = () => {
+    window.localStorage.clear();
+  }
+
     return (
         <div >
             <FaTwitter className="sidebar__twitterIcon"/>
@@ -22,7 +28,9 @@ export default function Sidebar() {
             <SidebarOption text="Lists" Icon={FaRegListAlt}/>
             <SidebarOption text="Profile" Icon={FaRegUser}/>
             <SidebarOption text="More" Icon={FiMoreHorizontal}/>
-
+            <Link onClick={logout} to="/" className="logout">
+              <SidebarOption text="Logout" Icon={FiLogOut} onClick={logout}/>
+            </Link>
         <button className="sidebar__tweet">Tweet</button>
         {/* <TwitterIcon className="sidebar__twitterIcon" /> */}
   

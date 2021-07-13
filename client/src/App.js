@@ -16,21 +16,21 @@ function App(props) {
   const { location } = props;
 
   useEffect(() => {
-    const { location } = props;
+    // const { location } = props;
      if(shouldUpdatePreviousLocation()){
       previousLocation = location;
      }
   }, [])
 
   const shouldUpdatePreviousLocation = () => {
-    const { location } = props;
+    // const { location } = props;
     if (!location) return false;
         return !location.pathname==='/register';
     }
 
   const shouldUsePreviousLocation = () => {
     state.modal = state.modal;
-    const { location} = props;
+    // const { location} = props;
     if (!location) return false;
     return state.modal && location.pathname==='/register';
   }

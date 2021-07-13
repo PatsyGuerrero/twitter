@@ -7,9 +7,9 @@ const MOCK_USER = require("./MOCK_USER.json");
 
 async function dataPopulation() {
 
-    await createUser("santi","1234","santiagorincon2001@gmail.com","santi_malcriadito");
-    await createUser("fran","1235","franronaldo@gmail.com","fran_peligroso");
-    await createUser("Patsy Guerrero","123456","patsy_guerrero95@hotmail.com","patsyguerrero");
+    await createUser("santi","1234","santiagorincon2001@gmail.com","santi_rincon");
+    await createUser("fran","1235","franronaldo@gmail.com","NomadaDigital");
+    await createUser("Patsy Guerrero","123456","patsy_guerrero95@hotmail.com","ViajandoSola");
     //await User.bulkCreate(MOCK_USER);
    // await User.bulkCreate(MOCK_USER);
 

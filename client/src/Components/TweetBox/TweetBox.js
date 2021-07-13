@@ -1,52 +1,48 @@
 import React from 'react';
 import './TweetBox.css';
-import { urlCreateTweet} from '../../Conections/url';
+import { urlCreateTweet, urlGetTweets} from '../../Conections/url';
 
 
-export default function TweetBox() {
-  let response;
-  let local= localStorage.getItem('email').split('\"')[1];
+export default function TweetBox({handleTweets}) {
+    let response;
+    let email= localStorage.getItem('email').split('\"')[1];
 
-  const [input, setInput] = React.useState({
-    tweet: '',
-    url: '',
-    email:local ,
-    error: ''
-});
+    const [input, setInput] = React.useState({
+      tweet: '',
+      url: '',
+      error: ''
+    });
 
     const handleInputs = (e) => {
-      console.log('nu', input.email)
       e.preventDefault();
       setInput({
           ...input,
           [e.target.name]: e.target.value 
       })
-      console.log('input', input)
     }
 
-
     const handleSubmit = async (e) => {
-     console.log('handle')
+    
       e.preventDefault();
-      response = await urlCreateTweet(input);
-      // console.log(typeof response?.data, 'oooo');
-      console.log('response data', response?.data);
+      response = await urlCreateTweet({...input, email});
+
       if(response.data ){
           setInput({
             tweet: '',
             url: '',
-            email:'',
             error: ''
           })
+    
+          handleTweets();
           return true;
       }
       else{
-        
           setInput({
               ...input,
               error: response?.data
           });
       }
+    
   }
 
     return (

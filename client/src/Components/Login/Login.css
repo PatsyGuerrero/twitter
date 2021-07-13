@@ -1,6 +1,37 @@
+.cont_principal{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  width: 100%;
+  /* background-color: cornflowerblue; */
+}
+
+.cont_principal .cont_iconTwitter{
+  
+  display: flex;
+  justify-content: center;
+  /* background-color: crimson; */
+}
+
+.cont_principal > h1 {
+  
+  display: flex;
+  justify-content: center;
+  font-size: 4rem;
+  /* background-color: crimson; */
+}
+
 .cont_form{
-    width: 30vw;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    max-width: 40rem;
     margin-top: 2rem;
+    /* background-color: chocolate; */
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .inputbox {

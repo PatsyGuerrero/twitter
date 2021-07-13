@@ -3,8 +3,6 @@ import './Landing.css';
 import { FaTwitter } from 'react-icons/fa';
 import {Link, NavLink} from 'react-router-dom';
 
-
-
 export default function Landing() {
     return (
         <div className='landing'>
@@ -32,7 +30,9 @@ export default function Landing() {
                         </button>
                     </div>
                 </div>
-            
+                <div className='querieswallpaper'>
+                    <img src={require(`../img/twitter.png`).default} alt='No carga la imagen'/>
+                </div>
         </div>
     )
 }
