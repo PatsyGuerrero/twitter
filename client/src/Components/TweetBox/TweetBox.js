@@ -1,11 +1,11 @@
 import React from 'react';
 import './TweetBox.css';
-import { urlCreateTweet, urlGetTweets} from '../../Conections/url';
+import { urlCreateTweet} from '../../Conections/url';
 
 
 export default function TweetBox({handleTweets}) {
     let response;
-    let email= localStorage.getItem('email').split('\"')[1];
+    let email= localStorage.getItem('email').split('"')[1];
 
     const [input, setInput] = React.useState({
       tweet: '',
@@ -59,7 +59,6 @@ export default function TweetBox({handleTweets}) {
               onChange={handleInputs} 
               value={input.tweet}
               placeholder="What's happening?"
-              type="text"
             />
           </div>
           <input

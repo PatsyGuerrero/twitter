@@ -12,15 +12,21 @@ import { urlValidate } from "./Conections/url";
 function App(props) {
   let [ state, setState ] = useState({ modal: true, validate: false });
   let forceLocation, token= localStorage.getItem('token'), user= localStorage.getItem('email');
-  let previousLocation
+  let previousLocation;
+  let dependency= localStorage.getItem('token');
   const { location } = props;
 
-  useEffect(() => {
-    // const { location } = props;
-     if(shouldUpdatePreviousLocation()){
+  const callPrevious= () => {
+    if(shouldUpdatePreviousLocation()){
       previousLocation = location;
      }
-  }, [])
+  }
+  useEffect(() => {
+    // const { location } = props;
+    callPrevious();
+  })
+
+  
 
   const shouldUpdatePreviousLocation = () => {
     // const { location } = props;
@@ -29,7 +35,7 @@ function App(props) {
     }
 
   const shouldUsePreviousLocation = () => {
-    state.modal = state.modal;
+    // state.modal = state.modal;
     // const { location} = props;
     if (!location) return false;
     return state.modal && location.pathname==='/register';
@@ -43,13 +49,14 @@ function App(props) {
     forceLocation= location;
   }
 
+  
   useEffect(()=>{
     if(!state.validate){
       (async function() {
         setState({ ...state, validate: (await urlValidate(user, token)).data });
       })();
     }
-  }, [state.validate,localStorage.getItem('token')])
+  },[state,user, token, dependency])
   // let security= validateToken().then( response => response);
   
   if(state.validate){
