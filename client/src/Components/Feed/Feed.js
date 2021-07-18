@@ -16,7 +16,7 @@ export default function Feed() {
               setTweets((await urlGetTweets()).data.reverse());
             })();
           }
-    }, [])    
+    }, [tweets.length])    
 
    const handleTweets = async () => {
         setTweets((await urlGetTweets()).data.reverse());
