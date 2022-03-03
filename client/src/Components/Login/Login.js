@@ -43,6 +43,8 @@ function Login() {
                 error: ''
             });
             // redireccionar a home
+            window.dataLayer.push({'event': 'event_name'});
+
             return <Redirect to='/home' />;
         }
         else{

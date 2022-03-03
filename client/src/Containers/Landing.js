@@ -4,6 +4,14 @@ import { FaTwitter } from 'react-icons/fa';
 import {Link, NavLink} from 'react-router-dom';
 
 export default function Landing() {
+
+    const handleSubmit =  () => {
+        window.dataLayer.push({'event': 'eventoDataLayerNeoDigital',
+        'pasoProceso': 'CC_Confirmacion_datos_Paso7',
+    'track':'track'});
+
+    }
+
     return (
         <div className='landing'>
          
@@ -28,6 +36,7 @@ export default function Landing() {
                                 Login
                             </NavLink>
                         </button>
+                        <button onClick={handleSubmit}>Patsy</button>
                     </div>
                 </div>
                 <div className='querieswallpaper'>
