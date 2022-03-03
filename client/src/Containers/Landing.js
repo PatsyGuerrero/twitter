@@ -4,11 +4,33 @@ import { FaTwitter } from 'react-icons/fa';
 import {Link, NavLink} from 'react-router-dom';
 
 export default function Landing() {
+  const [input, setInput] = React.useState({
+    IdUser: '',
+});
 
-    const handleSubmit =  () => {
-        window.dataLayer.push({'event': 'eventoDataLayerNeoDigital',
-        'pasoProceso': 'CC_Confirmacion_datos_Paso7',
-    'track':'track'});
+  const handleInputs = (e) => {
+    e.preventDefault();
+    setInput({
+        ...input,
+        [e.target.name]: e.target.value 
+    })
+    
+}
+
+  const handleSubmit =  () => {
+  window.dataLayer.push({
+    'event': 'eventoDataLayerNeoDigital',
+    'pasoProceso': 'CC_Confirmacion_datos_Paso7',
+  });
+
+    }
+
+  const segurosAhorros =  () => {
+    window.dataLayer.push({
+    'event': 'popup_seguros',
+    'pasoProceso': 'CC_Confirmacion_datos_Paso7',
+    'idUsuario':input.IdUser
+  });
 
     }
 
@@ -37,6 +59,16 @@ export default function Landing() {
                             </NavLink>
                         </button>
                         <button onClick={handleSubmit}>Patsy</button>
+                        <button onClick={segurosAhorros}>Seguros de Ahorros</button>
+                        <input 
+                        type="text"
+                        name="IdUser"
+                        onChange={handleInputs} 
+                        value={input.IdUser}
+                        placeholder='' 
+                        required
+                        />
+                        
                     </div>
                 </div>
                 <div className='querieswallpaper'>
